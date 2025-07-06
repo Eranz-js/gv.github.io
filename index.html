@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gavrie Maruanaja</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Fira Code', monospace;
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    #typewriter {
+      color: #38bdf8;
+      font-weight: bold;
+      min-height: 24px;
+      margin-bottom: 30px;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.03) rotateZ(-1deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    h2 {
+      color: #7dd3fc;
+      margin-bottom: 10px;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    ul li::before {
+      content: "• ";
+      color: #38bdf8;
+    }
+    button {
+      margin-top: 15px;
+      background-color: #38bdf8;
+      color: #0f172a;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #0ea5e9;
+    }
+    .output {
+      margin-top: 15px;
+      font-style: italic;
+      color: #86efac;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Halo 👋, Saya Gavrie Maruanaja</h1>
+    <div id="typewriter"></div>
+
+    <div class="card">
+      <h2>👤 Tentang Saya</h2>
+      <p>Nama saya <strong>Gavrie Maruanaja</strong>, seorang penggemar teknologi dan kreativitas dari Ambon.</p>
+      <p>Email: <a href="mailto:gavrie@example.com" style="color:#60a5fa">gavrie@example.com</a></p>
+    </div>
+
+    <div class="card">
+      <h2>🎧 Hobi</h2>
+      <ul>
+        <li>Dance</li>
+        <li>Mendengar Musik</li>
+        <li>Eksperimen website dan coding</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🛠 Skill</h2>
+      <ul>
+        <li>HTML, CSS, JavaScript</li>
+        <li>Design (Canva)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🧪 Interaksi</h2>
+      <p>Klik tombol untuk menyapa!</p>
+      <button onclick="sayHi()">Sapa Saya!</button>
+      <p class="output" id="greeting"></p>
+    </div>
+  </div>
+
+  <script>
+    // Text typing animation
+    const texts = ["Web Developer", "Dancer", "Mahasiswa UKIM", "Open Source Enthusiast"];
+    let i = 0, j = 0, current = "", isDeleting = false;
+    function type() {
+      if (i < texts.length) {
+        if (!isDeleting && j <= texts[i].length) {
+          current = texts[i].substring(0, j++);
+        } else if (isDeleting && j >= 0) {
+          current = texts[i].substring(0, j--);
+        }
+        document.getElementById("typewriter").innerHTML = current;
+        if (!isDeleting && j === texts[i].length) {
+          isDeleting = true;
+          setTimeout(type, 1000);
+        } else if (isDeleting && j === 0) {
+          isDeleting = false;
+          i = (i + 1) % texts.length;
+        }
+        setTimeout(type, isDeleting ? 60 : 100);
+      }
+    }
+    type();
+
+    // JS greeting button
+    function sayHi() {
+      const waktu = new Date().getHours();
+      let greet = waktu < 12 ? "Selamat pagi!" : waktu < 18 ? "Selamat siang!" : "Selamat malam!";
+      document.getElementById("greeting").textContent = greet + " Saya senang kamu mampir ke website saya.";
+    }
+  </script>
+</body>
+</html>
